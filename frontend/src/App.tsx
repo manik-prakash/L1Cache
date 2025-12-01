@@ -13,6 +13,7 @@ import { PublicShared } from './pages/PublicShared';
 import { Settings } from './pages/Settings';
 import { AppShell } from './components/layout/AppShell';
 import { Spinner } from './components/ui/Spinner';
+import './App.css';
 
 function ProtectedRoute({ children }: { children: React.ReactElement }) {
   const { user, loading } = useAuth();

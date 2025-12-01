@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState, useCallback, type ReactNode } from 'react';
 import { api } from '../lib/httpClient';
 import type { ThemeResponse } from '../lib/types';
 import { useAuth } from './AuthContext';
@@ -22,9 +22,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const loadUserTheme = async () => {
+  const loadUserTheme = useCallback(async () => {
     if (!user) return;
-
     try {
       const data = await api.get<ThemeResponse>('/profile/theme');
       if (data?.theme) {
@@ -32,10 +31,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         applyTheme(data.theme);
       }
     } catch (error) {
-      // If theme fetch fails, use local storage
       console.error('Failed to load user theme:', error);
     }
-  };
+  }, [user]);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
@@ -47,14 +45,14 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     if (user) {
       loadUserTheme();
     }
-  }, [user]);
+  }, [user, loadUserTheme]);
 
   const toggleTheme = async () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
     applyTheme(newTheme);
     localStorage.setItem('theme', newTheme);
-
+    console.log(newTheme);
     if (user) {
       try {
         await api.put('/profile/theme', { theme: newTheme });
@@ -71,10 +69,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   );
 }
 
-export function useTheme() {
+export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (context === undefined) {
     throw new Error('useTheme must be used within a ThemeProvider');
   }
   return context;
-}
+};
