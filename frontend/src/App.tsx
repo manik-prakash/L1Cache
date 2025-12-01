@@ -42,7 +42,6 @@ function ComingSoon({ title }: { title: string }) {
   );
 }
 
-// Wrapper components that use React Router
 function DashboardWrapper() {
   const navigate = useNavigate();
   
@@ -105,7 +104,6 @@ function AppRouter() {
     );
   }
 
-  // Public routes (no auth required, no AppShell)
   if (!user) {
     return (
       <Routes>
@@ -118,7 +116,6 @@ function AppRouter() {
     );
   }
 
-  // Protected routes (wrapped in AppShell)
   return (
     <AppShell>
       <Routes>

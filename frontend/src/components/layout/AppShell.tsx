@@ -29,7 +29,6 @@ export function AppShell({ children }: AppShellProps) {
 
   useEffect(() => {
     if (!user) {
-      setProfile(null);
       return;
     }
     

@@ -58,31 +58,32 @@ export function ItemCard({
             {isStarred && <Star size={16} className="text-yellow-500 fill-yellow-500 shrink-0" />}
             {isPublic && <Share2 size={16} className="text-blue-500 shrink-0" />}
           </div>
-          <Dropdown
-            trigger={
-              <button
-                onClick={(e) => e.stopPropagation()}
-                className="p-1 hover:bg-gray-100 rounded transition-colors"
-                aria-label="Item options"
-              >
-                <MoreVertical size={20} className="text-gray-600" />
-              </button>
-            }
-          >
-            <DropdownItem onClick={() => onEdit(id)} icon={<Edit size={16} />}>
-              Edit
-            </DropdownItem>
-            <DropdownItem onClick={() => onToggleStar(id)} icon={<Star size={16} />}>
-              {isStarred ? 'Unstar' : 'Star'}
-            </DropdownItem>
-            <DropdownItem onClick={() => onShare(id)} icon={<Share2 size={16} />}>
-              Share
-            </DropdownItem>
-            <DropdownDivider />
-            <DropdownItem onClick={() => onDelete(id)} icon={<Trash2 size={16} />} className="text-red-600 hover:bg-red-50">
-              Delete
-            </DropdownItem>
-          </Dropdown>
+          <div onClick={(e) => e.stopPropagation()}>
+            <Dropdown
+              trigger={
+                <button
+                  className="p-1 hover:bg-gray-100 rounded transition-colors"
+                  aria-label="Item options"
+                >
+                  <MoreVertical size={20} className="text-gray-600" />
+                </button>
+              }
+            >
+              <DropdownItem onClick={() => onEdit(id)} icon={<Edit size={16} />}>
+                Edit
+              </DropdownItem>
+              <DropdownItem onClick={() => onToggleStar(id)} icon={<Star size={16} />}>
+                {isStarred ? 'Unstar' : 'Star'}
+              </DropdownItem>
+              <DropdownItem onClick={() => onShare(id)} icon={<Share2 size={16} />}>
+                Share
+              </DropdownItem>
+              <DropdownDivider />
+              <DropdownItem onClick={() => onDelete(id)} icon={<Trash2 size={16} />} className="text-red-600 hover:bg-red-50">
+                Delete
+              </DropdownItem>
+            </Dropdown>
+          </div>
         </div>
 
         <p className="text-gray-600 text-sm mb-3 line-clamp-3">{content || 'No content'}</p>
