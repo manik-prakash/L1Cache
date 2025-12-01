@@ -46,13 +46,7 @@ export function Sidebar({ currentView, onLogout, userDisplayName, userAvatar }: 
       )}
 
       <aside
-        className={`
-          fixed lg:static inset-y-0 left-0 z-40
-          w-64 bg-white border-r border-gray-200
-          flex flex-col
-          transform transition-transform duration-200 ease-in-out
-          ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
-        `}
+        className="hidden lg:flex lg:flex-col lg:fixed lg:inset-y-0 lg:w-64 lg:bg-white lg:border-r lg:border-gray-200 lg:overflow-y-auto"
       >
         <div className="p-6 border-b border-gray-200">
           <div className="flex items-center gap-2 mb-6">

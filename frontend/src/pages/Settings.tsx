@@ -172,34 +172,6 @@ export function Settings() {
             </div>
           </div>
         </section>
-
-        <section className="bg-white rounded-lg border border-gray-200 shadow-sm p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Keyboard Shortcuts</h2>
-
-          <div className="space-y-3 text-sm">
-            <div className="flex items-center justify-between">
-              <span className="text-gray-700">New item</span>
-              <kbd className="px-2 py-1 bg-gray-100 border border-gray-300 rounded text-gray-900 font-mono">
-                N
-              </kbd>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-gray-700">Focus search</span>
-              <kbd className="px-2 py-1 bg-gray-100 border border-gray-300 rounded text-gray-900 font-mono">
-                /
-              </kbd>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-gray-700">Go to dashboard</span>
-              <kbd className="px-2 py-1 bg-gray-100 border border-gray-300 rounded text-gray-900 font-mono mr-1">
-                G
-              </kbd>
-              <kbd className="px-2 py-1 bg-gray-100 border border-gray-300 rounded text-gray-900 font-mono">
-                D
-              </kbd>
-            </div>
-          </div>
-        </section>
       </div>
     </div>
   );

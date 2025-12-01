@@ -25,11 +25,11 @@ function ProtectedRoute({ children }: { children: React.ReactElement }) {
       </div>
     );
   }
-  
+
   if (!user) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
-  
+
   return children;
 }
 
@@ -44,14 +44,14 @@ function ComingSoon({ title }: { title: string }) {
 
 function DashboardWrapper() {
   const navigate = useNavigate();
-  
+
   return (
-    <Dashboard 
+    <Dashboard
       onNavigate={(view, id) => {
         if (view === 'new') navigate('/new');
         else if (view === 'edit' && id) navigate(`/edit/${id}`);
         else if (view === 'item' && id) navigate(`/item/${id}`);
-      }} 
+      }}
     />
   );
 }
@@ -59,11 +59,13 @@ function DashboardWrapper() {
 function ItemFormWrapper() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  
+  const key = id ? `edit-${id}` : 'new';
+
   return (
-    <ItemForm 
-      itemId={id} 
-      onNavigate={() => navigate('/dashboard')} 
+    <ItemForm
+      key={key}
+      itemId={id}
+      onNavigate={() => navigate('/dashboard')}
     />
   );
 }
@@ -120,61 +122,61 @@ function AppRouter() {
     <AppShell>
       <Routes>
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
-        <Route 
-          path="/dashboard" 
+        <Route
+          path="/dashboard"
           element={
             <ProtectedRoute>
               <DashboardWrapper />
             </ProtectedRoute>
-          } 
+          }
         />
-        <Route 
-          path="/new" 
+        <Route
+          path="/new"
           element={
             <ProtectedRoute>
               <ItemFormWrapper />
             </ProtectedRoute>
-          } 
+          }
         />
-        <Route 
-          path="/edit/:id" 
+        <Route
+          path="/edit/:id"
           element={
             <ProtectedRoute>
               <ItemFormWrapper />
             </ProtectedRoute>
-          } 
+          }
         />
-        <Route 
-          path="/item/:id" 
+        <Route
+          path="/item/:id"
           element={
             <ProtectedRoute>
               <ItemDetailsWrapper />
             </ProtectedRoute>
-          } 
+          }
         />
-        <Route 
-          path="/settings" 
+        <Route
+          path="/settings"
           element={
             <ProtectedRoute>
               <Settings />
             </ProtectedRoute>
-          } 
+          }
         />
-        <Route 
-          path="/collections" 
+        <Route
+          path="/collections"
           element={
             <ProtectedRoute>
               <ComingSoon title="Collections" />
             </ProtectedRoute>
-          } 
+          }
         />
-        <Route 
-          path="/tags" 
+        <Route
+          path="/tags"
           element={
             <ProtectedRoute>
               <ComingSoon title="Tags" />
             </ProtectedRoute>
-          } 
+          }
         />
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>

@@ -43,7 +43,7 @@ export function ItemForm({ itemId, onNavigate }: ItemFormProps) {
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/^-+|-+$/g, '')
-      .substring(0, 50); 
+      .substring(0, 50);
 
     const timestamp = Date.now().toString(36);
     return `${baseSlug}-${timestamp}`;
@@ -182,10 +182,10 @@ export function ItemForm({ itemId, onNavigate }: ItemFormProps) {
         type,
         source_url: sourceUrl.trim() || null,
         is_public: isPublic,
-        share_slug: isPublic ? (shareSlug.trim() || generateSlug(title)) : undefined,
+        share_slug: isPublic ? shareSlug.trim() : generateSlug(title),
         tag_ids: selectedTags.map((tag) => tag.id),
       };
-
+      console.log(itemData.share_slug);
       if (itemId) {
         const updatedItem = await api.put<Item>(`/items/${itemId}`, itemData);
         showToast('success', 'Item updated successfully');
@@ -225,12 +225,12 @@ export function ItemForm({ itemId, onNavigate }: ItemFormProps) {
 
   useEffect(() => {
     if (!user) return;
-
     fetchTags();
 
     if (itemId) {
       fetchItem();
     } else {
+      clearDraft();
       loadDraft();
       setInitialLoading(false);
     }
@@ -295,8 +295,8 @@ export function ItemForm({ itemId, onNavigate }: ItemFormProps) {
                 type="button"
                 onClick={() => setType(t)}
                 className={`px-4 py-2 rounded-lg font-medium capitalize transition-colors ${type === t
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
               >
                 {t}

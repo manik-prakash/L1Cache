@@ -107,12 +107,9 @@ export function ItemDetails({ itemId, onNavigate }: ItemDetailsProps) {
       title: item.title,
       content: item.content,
       type: item.type,
-      source_url: item.source_url,
-      tags: item.tags?.map((t: any) => t.name),
-      created_at: item.created_at,
-      updated_at: item.updated_at,
+      source_url: item.source_url
     };
-
+    
     const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -120,7 +117,6 @@ export function ItemDetails({ itemId, onNavigate }: ItemDetailsProps) {
     a.download = `${item.title.replace(/[^a-z0-9]/gi, '-').toLowerCase()}.json`;
     a.click();
     URL.revokeObjectURL(url);
-
     showToast('success', 'Item exported successfully');
   };
 

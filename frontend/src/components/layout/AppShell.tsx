@@ -46,14 +46,14 @@ export function AppShell({ children }: AppShellProps) {
   }, [user]);
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <div className="h-screen overflow-hidden bg-gray-50 flex">
       <Sidebar
         currentView={currentView}
         onLogout={signOut}
         userDisplayName={profile?.display_name || user?.email || 'User'}
         userAvatar={profile?.avatar_url}
       />
-      <main className="flex-1 overflow-auto">
+      <main className="flex-1 overflow-y-auto lg:pl-64">
         {children}
       </main>
     </div>
