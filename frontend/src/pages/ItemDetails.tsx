@@ -10,6 +10,7 @@ import { useToast } from '../components/ui/Toast';
 import { api} from '../lib/httpClient';
 import type { Item } from '../lib/types';
 import {getErrorMessage} from '../lib/utils';
+
 interface ItemDetailsProps {
   itemId: string;
   onNavigate: (view: string, itemId?: string) => void;
@@ -68,8 +69,6 @@ export function ItemDetails({ itemId, onNavigate }: ItemDetailsProps) {
 
   const handleShare = async () => {
     if (!item) return;
-
-    // If item is public but doesn't have share_slug, refresh the item
     if (item.is_public && !item.share_slug) {
       try {
         const refreshedItem = await api.get<Item>(`/items/${itemId}`);
