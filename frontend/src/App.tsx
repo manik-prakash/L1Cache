@@ -1,13 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate,
-  useLocation,
-  useNavigate,
-  useParams,
-} from 'react-router-dom';
+import React, { useEffect} from 'react';
+import {BrowserRouter,Routes,Route,Navigate,useLocation,useNavigate,useParams} from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { ToastProvider } from './components/ui/Toast';
@@ -21,18 +13,8 @@ import { PublicShared } from './pages/PublicShared';
 import { Settings } from './pages/Settings';
 import { AppShell } from './components/layout/AppShell';
 import { Spinner } from './components/ui/Spinner';
-import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 
-type View =
-  | 'landing'
-  | 'login'
-  | 'signup'
-  | 'dashboard'
-  | 'new'
-  | 'edit'
-  | 'item'
-  | 'settings'
-  | 'shared';
+type View ='landing'| 'login'| 'signup'| 'dashboard'| 'new'| 'edit'| 'item'| 'settings'| 'shared';
 
 function ProtectedRoute({ children }: { children: React.ReactElement }) {
   const { user, loading } = useAuth();
@@ -45,12 +27,9 @@ function ProtectedRoute({ children }: { children: React.ReactElement }) {
       </div>
     );
   }
-
   if (!user) {
-    // Save where the user wanted to go
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
-
   return children;
 }
 
@@ -58,9 +37,7 @@ function AppRouter() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const lastKeyRef = useRef<string | null>(null);
 
-  // Derive a "view" string from the current pathname for AppShell
   const getViewFromPath = (pathname: string): View => {
     if (pathname.startsWith('/shared/')) return 'shared';
     if (pathname === '/login') return 'login';
@@ -76,64 +53,18 @@ function AppRouter() {
   };
 
   const currentView = getViewFromPath(location.pathname);
-  useKeyboardShortcuts(
-    [
-      {
-        key: 'n',
-        callback: () => {
-          if (user && currentView !== 'new' && currentView !== 'edit') {
-            navigate('/new');
-          }
-        },
-      },
-      {
-        key: '/',
-        callback: () => {
-          // focus search only on dashboard
-          if (user && currentView === 'dashboard') {
-            const searchInput = document.querySelector(
-              'input[placeholder*="Search"]'
-            ) as HTMLInputElement | null;
-            if (searchInput) searchInput.focus();
-          }
-        },
-      },
-      {
-        key: 'd',
-        callback: () => {
-          if (lastKeyRef.current === 'g' && user) {
-            navigate('/dashboard');
-          }
-          lastKeyRef.current = 'd';
-          window.setTimeout(() => (lastKeyRef.current = null), 1000);
-        },
-      },
-      {
-        key: 'g',
-        callback: () => {
-          lastKeyRef.current = 'g';
-          window.setTimeout(() => (lastKeyRef.current = null), 1000);
-        },
-      },
-    ],
-    // disable shortcuts when viewing a shared page
-    currentView === 'shared'
-  );
 
-  // If the app lands on '/' and user exists, send them to /dashboard
   useEffect(() => {
     if (!loading && user && location.pathname === '/') {
       navigate('/dashboard', { replace: true });
     }
   }, [loading, user, location.pathname, navigate]);
 
-  // Only show AppShell for authenticated users on protected routes
   const isPublicRoute = currentView === 'landing' || currentView === 'login' || currentView === 'signup' || currentView === 'shared';
   
   if (isPublicRoute || !user) {
     return (
       <Routes>
-        {/* Public routes - no AppShell */}
         <Route path="/" element={user ? <Navigate to="/dashboard" replace /> : <Landing onGetStarted={() => navigate('/signup')} />} />
         <Route path="/login" element={user ? <Navigate to="/dashboard" replace /> : <Login onSwitchToSignup={() => navigate('/signup')} />} />
         <Route path="/signup" element={user ? <Navigate to="/dashboard" replace /> : <Signup onSwitchToLogin={() => navigate('/login')} />} />
@@ -143,10 +74,8 @@ function AppRouter() {
     );
   }
 
-  // Protected routes - with AppShell
   return (
     <AppShell currentView={currentView} onNavigate={(view: string, itemId?: string) => {
-      // convert onNavigate calls to react-router navigation
       switch (view) {
         case 'dashboard':
           navigate('/dashboard');
@@ -173,16 +102,13 @@ function AppRouter() {
           element={
             <ProtectedRoute>
               <Dashboard onNavigate={(v: string, id?: string) => {
-                // Dashboard component may call onNavigate('item', id) etc.
                 switch (v) {
                   case 'dashboard':
                     navigate('/dashboard');
                     break;
-
                   case 'new':
                     navigate('/new');
                     break;
-
                   case 'edit':
                     if (id) {
                       console.log('Navigating to edit page with id:', id);
@@ -191,15 +117,12 @@ function AppRouter() {
                       console.error('Edit navigation called without id');
                     }
                     break;
-
                   case 'item':
                     if (id) navigate(`/item/${id}`);
                     break;
-
                   case 'settings':
                     navigate('/settings');
                     break;
-
                   default:
                     navigate('/');
                 }
@@ -257,8 +180,6 @@ function AppRouter() {
             </ProtectedRoute>
           }
         />
-
-        {/* Fallback */}
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
     </AppShell>

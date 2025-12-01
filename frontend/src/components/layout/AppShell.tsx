@@ -19,7 +19,6 @@ export function AppShell({ currentView, onNavigate, children }: AppShellProps) {
       setProfile(null);
       return;
     }
-
     const fetchProfile = async () => {
       try {
         const data = await api.get<ProfileResponse>('/profile');
@@ -29,7 +28,6 @@ export function AppShell({ currentView, onNavigate, children }: AppShellProps) {
         setProfile(null);
       }
     };
-
     fetchProfile();
   }, [user]);
 

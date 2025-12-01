@@ -8,7 +8,7 @@ import { Spinner } from '../components/ui/Spinner';
 import { useAuth } from '../contexts/AuthContext';
 import { useToast } from '../components/ui/Toast';
 import { api } from '../lib/httpClient';
-import{getErrorMessage} from '../lib/utils';
+import { getErrorMessage } from '../lib/utils';
 import type { Item, Tag } from '../lib/types';
 
 type TagInputTag = { id: string; name: string; color: string | null };
@@ -42,7 +42,6 @@ export function ItemForm({ itemId, onNavigate }: ItemFormProps) {
     setSelectedTags([]);
     setLoading(false);
   };
-
   useEffect(() => {
     if (user) {
       fetchTags();
@@ -50,36 +49,40 @@ export function ItemForm({ itemId, onNavigate }: ItemFormProps) {
     if (itemId) {
       fetchItem();
     } else {
-      setTitle('');
-      setContent('');
-      setType('thought');
-      setSourceUrl('');
-      setIsPublic(false);
-      setShareSlug('');
-      setSelectedTags([]);
+      const draftKey = 'draft_new';
+      const savedDraft = localStorage.getItem(draftKey);
+      if (savedDraft) {
+        try {
+          const draft = JSON.parse(savedDraft);
+          setTitle(draft.title || '');
+          setContent(draft.content || '');
+          setType(draft.type || 'thought');
+          setSourceUrl(draft.sourceUrl || '');
+        } catch (error) {
+          console.error('Failed to load draft:', error);
+        }
+      }
       setInitialLoading(false);
-      localStorage.removeItem('draft_new');
     }
   }, [user, itemId]);
 
   useEffect(() => {
-    const draftKey = `draft_${itemId || 'new'}`;
-    const savedDraft = localStorage.getItem(draftKey);
-
-    if (savedDraft && !itemId) {
-      const draft = JSON.parse(savedDraft);
-      setTitle(draft.title || '');
-      setContent(draft.content || '');
-      setType(draft.type || 'thought');
-      setSourceUrl(draft.sourceUrl || '');
-    }
-
+    if (itemId) return;
+    const draftKey = 'draft_new';
     const interval = setInterval(() => {
       if (title || content) {
-        localStorage.setItem(draftKey, JSON.stringify({ title, content, type, sourceUrl }));
+        try {
+          localStorage.setItem(draftKey, JSON.stringify({
+            title,
+            content,
+            type,
+            sourceUrl
+          }));
+        } catch (error) {
+          console.error('Failed to save draft:', error);
+        }
       }
-    }, 10000);
-
+    }, 10000); 
     return () => clearInterval(interval);
   }, [title, content, type, sourceUrl, itemId]);
 
@@ -215,11 +218,10 @@ export function ItemForm({ itemId, onNavigate }: ItemFormProps) {
                 key={t}
                 type="button"
                 onClick={() => setType(t)}
-                className={`px-4 py-2 rounded-lg font-medium capitalize transition-colors ${
-                  type === t
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
+                className={`px-4 py-2 rounded-lg font-medium capitalize transition-colors ${type === t
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
               >
                 {t}
               </button>
@@ -230,7 +232,7 @@ export function ItemForm({ itemId, onNavigate }: ItemFormProps) {
           label="Content"
           value={content}
           onChange={setContent}
-          placeholder="Write your thoughts in markdown..."
+          placeholder="Write your thoughts"
         />
         {(type === 'link' || type === 'bookmark') && (
           <Input
