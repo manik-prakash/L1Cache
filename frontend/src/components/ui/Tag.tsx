@@ -8,8 +8,8 @@ interface TagProps {
 }
 
 export function Tag({ label, color, onRemove, className = '' }: TagProps) {
-  const bgColor = color || 'bg-blue-100';
-  const textColor = color ? 'text-gray-900' : 'text-blue-800';
+  const bgColor = color || 'bg-[#0acffe]/20';
+  const textColor = color ? 'text-[#e6edf3]' : 'text-[#0acffe]';
 
   return (
     <span

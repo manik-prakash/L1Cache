@@ -63,7 +63,7 @@ export function TagInput({ selectedTags, availableTags, onTagsChange, onCreateTa
 
   return (
     <div className="space-y-2">
-      <label className="block text-sm font-medium text-gray-700">Tags</label>
+      <label className="block text-sm font-medium text-[#8b9ba7]">Tags</label>
 
       {selectedTags.length > 0 && (
         <div className="flex flex-wrap gap-2">
@@ -85,14 +85,14 @@ export function TagInput({ selectedTags, availableTags, onTagsChange, onCreateTa
         />
 
         {showSuggestions && (
-          <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-48 overflow-y-auto">
+          <div className="absolute z-10 w-full mt-1 bg-[#1a232c] border border-[#1a232c] rounded-lg shadow-lg max-h-48 overflow-y-auto">
             {suggestions.length > 0 ? (
               suggestions.map((tag) => (
                 <button
                   key={tag.id}
                   type="button"
                   onClick={() => handleAddTag(tag)}
-                  className="w-full px-3 py-2 text-left hover:bg-gray-100 flex items-center gap-2"
+                  className="w-full px-3 py-2 text-left hover:bg-[#11181f] flex items-center gap-2"
                 >
                   <Tag label={tag.name} color={tag.color || undefined} />
                 </button>
@@ -101,7 +101,7 @@ export function TagInput({ selectedTags, availableTags, onTagsChange, onCreateTa
               <button
                 type="button"
                 onClick={handleCreateTag}
-                className="w-full px-3 py-2 text-left hover:bg-gray-100 flex items-center gap-2 text-blue-600"
+                className="w-full px-3 py-2 text-left hover:bg-[#11181f] flex items-center gap-2 text-[#0acffe]"
               >
                 <Plus size={16} />
                 Create "{inputValue}"

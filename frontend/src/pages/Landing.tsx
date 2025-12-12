@@ -7,12 +7,12 @@ interface LandingProps {
 
 export function Landing({ onGetStarted }: LandingProps) {
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 to-gray-100">
-      <nav className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+    <div className="min-h-screen bg-[#0a0f14]">
+      <nav className="bg-[#11181f] border-b border-[#1a232c]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex justify-between items-center border-b border-[#1a232c]">
           <div className="flex items-center gap-2">
-            <Brain className="text-blue-600" size={32} />
-            <span className="text-xl font-bold text-gray-900">Second Brain</span>
+            <Brain className="text-[#0acffe]" size={32} />
+            <span className="text-xl font-bold text-text-primary">Second Brain</span>
           </div>
           <Button onClick={onGetStarted} size="sm">
             Get Started
@@ -22,10 +22,10 @@ export function Landing({ onGetStarted }: LandingProps) {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-5xl font-bold text-text-primary mb-4">
             Your Digital Memory Palace
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
+          <p className="text-xl text-text-muted max-w-2xl mx-auto mb-8">
             Capture thoughts, save links, organize knowledge.
             Build your personal knowledge base with ease.
           </p>
@@ -36,7 +36,7 @@ export function Landing({ onGetStarted }: LandingProps) {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           <FeatureCard
-            icon={<Brain className="text-blue-600" size={32} />}
+            icon={<Brain className="text-[#0acffe]" size={32} />}
             title="Capture Anything"
             description="Save thoughts, links, tweets, articles, and media in one place"
           />
@@ -57,11 +57,11 @@ export function Landing({ onGetStarted }: LandingProps) {
           />
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-12 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+        <div className="bg-[#11181f] rounded-2xl shadow-xl p-12 text-center border border-[#1a232c]">
+          <h2 className="text-3xl font-bold text-text-primary mb-4">
             Ready to enhance your memory?
           </h2>
-          <p className="text-lg text-gray-600 mb-8">
+          <p className="text-lg text-text-muted mb-8">
             Join thousands who are building their second brain
           </p>
           <Button onClick={onGetStarted} size="lg">
@@ -70,8 +70,8 @@ export function Landing({ onGetStarted }: LandingProps) {
         </div>
       </main>
 
-      <footer className="border-t border-gray-200 mt-16 py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-600">
+      <footer className="border-t border-[#1a232c] mt-16 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-text-muted">
           <p>Second Brain &copy; 2025. Built by Manik.</p>
         </div>
       </footer>
@@ -81,10 +81,10 @@ export function Landing({ onGetStarted }: LandingProps) {
 
 function FeatureCard({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) {
   return (
-    <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+    <div className="bg-[#11181f] rounded-lg p-6 shadow-sm border border-[#1a232c] hover:shadow-md transition-shadow">
       <div className="mb-4">{icon}</div>
-      <h3 className="text-lg font-semibold text-gray-900 mb-2">{title}</h3>
-      <p className="text-gray-600 text-sm">{description}</p>
+      <h3 className="text-lg font-semibold text-text-primary mb-2">{title}</h3>
+      <p className="text-text-muted text-sm">{description}</p>
     </div>
   );
 }

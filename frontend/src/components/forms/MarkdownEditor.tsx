@@ -23,7 +23,7 @@ export function MarkdownEditor({ value, onChange, label, placeholder }: Markdown
     html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
 
-    html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">$1</a>');
+    html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="text-[#0acffe] hover:underline" target="_blank" rel="noopener noreferrer">$1</a>');
 
     html = html.replace(/^- (.*$)/gim, '<li class="ml-4">$1</li>');
     html = html.replace(/(<li.*<\/li>)/s, '<ul class="list-disc mb-2">$1</ul>');
@@ -37,7 +37,7 @@ export function MarkdownEditor({ value, onChange, label, placeholder }: Markdown
     <div>
       {label && (
         <div className="flex items-center justify-between mb-1">
-          <label className="block text-sm font-medium text-gray-700">{label}</label>
+          <label className="block text-sm font-medium text-[#8b9ba7]">{label}</label>
           <Button
             type="button"
             variant="ghost"
@@ -62,7 +62,7 @@ export function MarkdownEditor({ value, onChange, label, placeholder }: Markdown
 
       {isPreview ? (
         <div
-          className="min-h-[200px] p-3 border border-gray-300 rounded-lg bg-gray-50 prose prose-sm max-w-none"
+          className="min-h-[200px] p-3 border border-[#1a232c] rounded-lg bg-[#11181f] prose prose-sm max-w-none text-[#e6edf3]"
           dangerouslySetInnerHTML={{ __html: renderMarkdown(value) }}
         />
       ) : (

@@ -37,9 +37,8 @@ export function Dropdown({ trigger, children, align = 'right' }: DropdownProps) 
       <div onClick={() => setIsOpen(!isOpen)}>{trigger}</div>
       {isOpen && (
         <div
-          className={`absolute mt-2 py-2 bg-white rounded-lg shadow-lg border border-gray-200 min-w-[200px] z-50 ${
-            align === 'right' ? 'right-0' : 'left-0'
-          }`}
+          className={`absolute mt-2 py-2 bg-[#1a232c] rounded-lg shadow-lg border border-[#1a232c] min-w-[200px] z-50 ${align === 'right' ? 'right-0' : 'left-0'
+            }`}
           role="menu"
         >
           {children}
@@ -60,7 +59,7 @@ export function DropdownItem({ children, onClick, icon, className = '' }: Dropdo
   return (
     <button
       onClick={onClick}
-      className={`w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2 transition-colors ${className}`}
+      className={`w-full px-4 py-2 text-left text-sm text-[#e6edf3] hover:bg-[#11181f] flex items-center gap-2 transition-colors ${className}`}
       role="menuitem"
     >
       {icon}
@@ -74,5 +73,5 @@ interface DropdownDividerProps {
 }
 
 export function DropdownDivider({ className = '' }: DropdownDividerProps) {
-  return <div className={`my-1 border-t border-gray-200 ${className}`} />;
+  return <div className={`my-1 border-t border-[#1a232c] ${className}`} />;
 }

@@ -12,7 +12,7 @@ export function Spinner({ size = 'md', className = '' }: SpinnerProps) {
 
   return (
     <div
-      className={`${sizes[size]} border-blue-600 border-t-transparent rounded-full animate-spin ${className}`}
+      className={`${sizes[size]} border-[#0acffe] border-t-transparent rounded-full animate-spin ${className}`}
       role="status"
       aria-label="Loading"
     >

@@ -8,7 +8,7 @@ import { Spinner } from '../components/ui/Spinner';
 import { useAuth } from '../contexts/AuthContext';
 import { useToast } from '../components/ui/Toast';
 import { api } from '../lib/httpClient';
-import {getErrorMessage} from '../lib/utils';
+import { getErrorMessage } from '../lib/utils';
 import type { Item } from '../lib/types';
 
 interface DashboardProps {
@@ -96,30 +96,37 @@ export function Dashboard({ onNavigate }: DashboardProps) {
     const item = items.find((i) => i.id === id);
     if (!item) return;
 
-    if (item.is_public && !item.share_slug) {
+    // First check: Is the item public?
+    if (!item.is_public) {
+      showToast('info', 'This item must be public to share. Redirecting to edit...');
+      setTimeout(() => onNavigate('edit', id), 1000);
+      return;
+    }
+
+    // Item IS public - check/generate share link
+    if (item.share_slug) {
+      // Has slug, show it
+      const url = `${window.location.origin}/shared/${item.share_slug}`;
+      setShareUrl(url);
+      setShareModalOpen(true);
+    } else {
+      // Public but no slug yet - fetch to trigger generation
       try {
         const refreshedItem = await api.get<Item>(`/items/${id}`);
         if (refreshedItem.share_slug) {
           const url = `${window.location.origin}/shared/${refreshedItem.share_slug}`;
           setShareUrl(url);
           setShareModalOpen(true);
-          // Update item in state
+          // Update state
           setItems(items.map((i) => (i.id === id ? refreshedItem : i)));
           setFilteredItems(filteredItems.map((i) => (i.id === id ? refreshedItem : i)));
-          return;
+        } else {
+          showToast('error', 'Failed to generate share link');
         }
       } catch (error) {
-        console.error('Failed to refresh item:', error);
+        console.log(error);
+        showToast('error', 'Failed to get share link');
       }
-    }
-
-    if (item.share_slug) {
-      const url = `${window.location.origin}/shared/${item.share_slug}`;
-      setShareUrl(url);
-      setShareModalOpen(true);
-    } else {
-      onNavigate('edit', id);
-      showToast('info', 'Enable public sharing for this item first');
     }
   };
 
@@ -134,8 +141,8 @@ export function Dashboard({ onNavigate }: DashboardProps) {
       <div className="mb-8">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-            <p className="text-gray-600 mt-1">Your knowledge at a glance</p>
+            <h1 className="text-3xl font-bold text-text-primary">Dashboard</h1>
+            <p className="text-text-muted mt-1">Your knowledge at a glance</p>
           </div>
           <Button onClick={() => onNavigate('new')} className="flex items-center gap-2">
             <Plus size={20} />
@@ -206,7 +213,7 @@ export function Dashboard({ onNavigate }: DashboardProps) {
         size="sm"
       >
         <div className="p-6">
-          <p className="text-gray-700 mb-6">Are you sure you want to delete this item? This action cannot be undone.</p>
+          <p className="text-text-muted mb-6">Are you sure you want to delete this item? This action cannot be undone.</p>
           <div className="flex gap-3 justify-end">
             <Button variant="secondary" onClick={() => setDeleteModalOpen(false)}>
               Cancel
@@ -225,7 +232,7 @@ export function Dashboard({ onNavigate }: DashboardProps) {
         size="sm"
       >
         <div className="p-6">
-          <p className="text-gray-700 mb-4">Share this link with anyone:</p>
+          <p className="text-text-muted mb-4">Share this link with anyone:</p>
           <Input value={shareUrl} readOnly className="mb-4" />
           <div className="flex gap-3 justify-end">
             <Button variant="secondary" onClick={() => setShareModalOpen(false)}>

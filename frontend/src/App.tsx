@@ -10,6 +10,9 @@ import { ItemForm } from './pages/ItemForm';
 import { ItemDetails } from './pages/ItemDetails';
 import { PublicShared } from './pages/PublicShared';
 import { Settings } from './pages/Settings';
+import { Tags } from './pages/Tags';
+import { Collections } from './pages/Collections';
+import { Shared } from './pages/Shared';
 import { AppShell } from './components/layout/AppShell';
 import { Spinner } from './components/ui/Spinner';
 import './App.css';
@@ -158,7 +161,7 @@ function AppRouter() {
           path="/collections"
           element={
             <ProtectedRoute>
-              <ComingSoon title="Collections" />
+              <Collections />
             </ProtectedRoute>
           }
         />
@@ -166,7 +169,15 @@ function AppRouter() {
           path="/tags"
           element={
             <ProtectedRoute>
-              <ComingSoon title="Tags" />
+              <Tags />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/shared"
+          element={
+            <ProtectedRoute>
+              <Shared onNavigate={handleNavigate} />
             </ProtectedRoute>
           }
         />

@@ -6,7 +6,7 @@ import { Avatar } from '../components/ui/Avatar';
 import { useAuth } from '../contexts/AuthContext';
 import { useToast } from '../components/ui/Toast';
 import { api } from '../lib/httpClient';
-import {getErrorMessage} from '../lib/utils';
+import { getErrorMessage } from '../lib/utils';
 import type { ProfileResponse, ExportResponse } from '../lib/types';
 
 export function Settings() {
@@ -76,11 +76,11 @@ export function Settings() {
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">Settings</h1>
+      <h1 className="text-3xl font-bold text-text-primary mb-8">Settings</h1>
 
       <div className="space-y-8">
-        <section className="bg-white rounded-lg border border-gray-200 shadow-sm p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Profile</h2>
+        <section className="bg-[#11181f] rounded-lg border border-[#1a232c] shadow-sm p-6">
+          <h2 className="text-xl font-semibold text-text-primary mb-4">Profile</h2>
 
           <div className="flex items-center gap-4 mb-6">
             <Avatar src={avatarUrl || null} alt={displayName || user?.email || 'User'} size="lg" />
@@ -123,12 +123,12 @@ export function Settings() {
           </form>
         </section>
 
-        <section className="bg-white rounded-lg border border-gray-200 shadow-sm p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Data Management</h2>
+        <section className="bg-[#11181f] rounded-lg border border-[#1a232c] shadow-sm p-6">
+          <h2 className="text-xl font-semibold text-text-primary mb-4">Data Management</h2>
 
           <div className="space-y-4">
             <div>
-              <p className="font-medium text-gray-900 mb-2">Export Your Data</p>
+              <p className="font-medium text-text-primary mb-2">Export Your Data</p>
               <p className="text-sm text-gray-500 mb-4">
                 Download all your items and tags as a JSON file
               </p>

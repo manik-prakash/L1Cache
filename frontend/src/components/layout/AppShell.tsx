@@ -31,7 +31,7 @@ export function AppShell({ children }: AppShellProps) {
     if (!user) {
       return;
     }
-    
+
     const fetchProfile = async () => {
       try {
         const data = await api.get<ProfileResponse>('/profile');
@@ -41,12 +41,12 @@ export function AppShell({ children }: AppShellProps) {
         setProfile(null);
       }
     };
-    
+
     fetchProfile();
   }, [user]);
 
   return (
-    <div className="h-screen overflow-hidden bg-gray-50 flex">
+    <div className="h-screen overflow-hidden bg-[#0a0f14] flex">
       <Sidebar
         currentView={currentView}
         onLogout={signOut}

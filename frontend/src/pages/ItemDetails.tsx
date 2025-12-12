@@ -7,9 +7,9 @@ import { Input } from '../components/ui/Input';
 import { Spinner } from '../components/ui/Spinner';
 import { useAuth } from '../contexts/AuthContext';
 import { useToast } from '../components/ui/Toast';
-import { api} from '../lib/httpClient';
+import { api } from '../lib/httpClient';
 import type { Item } from '../lib/types';
-import {getErrorMessage} from '../lib/utils';
+import { getErrorMessage } from '../lib/utils';
 
 interface ItemDetailsProps {
   itemId: string;
@@ -69,19 +69,11 @@ export function ItemDetails({ itemId, onNavigate }: ItemDetailsProps) {
 
   const handleShare = async () => {
     if (!item) return;
-    if (item.is_public && !item.share_slug) {
-      try {
-        const refreshedItem = await api.get<Item>(`/items/${itemId}`);
-        if (refreshedItem.share_slug) {
-          const url = `${window.location.origin}/shared/${refreshedItem.share_slug}`;
-          setShareUrl(url);
-          setShareModalOpen(true);
-          setItem(refreshedItem);
-          return;
-        }
-      } catch (error) {
-        console.error('Failed to refresh item:', error);
-      }
+
+    if (!item.is_public) {
+      showToast('info', 'This item must be public to share. Redirecting to edit...');
+      setTimeout(() => onNavigate('edit', itemId), 1000);
+      return;
     }
 
     if (item.share_slug) {
@@ -89,8 +81,20 @@ export function ItemDetails({ itemId, onNavigate }: ItemDetailsProps) {
       setShareUrl(url);
       setShareModalOpen(true);
     } else {
-      onNavigate('edit', itemId);
-      showToast('info', 'Enable public sharing for this item first');
+      try {
+        const refreshedItem = await api.get<Item>(`/items/${itemId}`);
+        if (refreshedItem.share_slug) {
+          const url = `${window.location.origin}/shared/${refreshedItem.share_slug}`;
+          setShareUrl(url);
+          setShareModalOpen(true);
+          setItem(refreshedItem);
+        } else {
+          showToast('error', 'Failed to generate share link');
+        }
+      } catch (error) {
+        console.log(error);
+        showToast('error', 'Failed to get share link');
+      }
     }
   };
 
@@ -109,7 +113,7 @@ export function ItemDetails({ itemId, onNavigate }: ItemDetailsProps) {
       type: item.type,
       source_url: item.source_url
     };
-    
+
     const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -169,11 +173,11 @@ export function ItemDetails({ itemId, onNavigate }: ItemDetailsProps) {
         </Button>
       </div>
 
-      <div className="bg-white rounded-lg border border-gray-200 shadow-sm">
+      <div className="bg-[#11181f] rounded-lg border border-[#1a232c] shadow-sm">
         <div className="p-8">
           <div className="flex items-start justify-between gap-4 mb-6">
             <div className="flex-1">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">{item.title}</h1>
+              <h1 className="text-3xl font-bold text-text-primary mb-2">{item.title}</h1>
               <div className="flex items-center gap-4 text-sm text-gray-500">
                 <span className="capitalize">{item.type}</span>
                 <span>•</span>
@@ -219,14 +223,14 @@ export function ItemDetails({ itemId, onNavigate }: ItemDetailsProps) {
 
           {item.tags && item.tags.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-6">
-              {item.tags.map((tag: any) => (
+              {item.tags.map((tag) => (
                 <Tag key={tag.id} label={tag.name} color={tag.color || undefined} />
               ))}
             </div>
           )}
 
           <div
-            className="prose prose-sm max-w-none text-gray-700"
+            className="prose prose-sm max-w-none text-text-primary"
             dangerouslySetInnerHTML={{ __html: renderMarkdown(item.content) }}
           />
         </div>
@@ -239,7 +243,7 @@ export function ItemDetails({ itemId, onNavigate }: ItemDetailsProps) {
         size="sm"
       >
         <div className="p-6">
-          <p className="text-gray-700 mb-6">Are you sure you want to delete this item? This action cannot be undone.</p>
+          <p className="text-text-muted mb-6">Are you sure you want to delete this item? This action cannot be undone.</p>
           <div className="flex gap-3 justify-end">
             <Button variant="secondary" onClick={() => setDeleteModalOpen(false)}>
               Cancel
@@ -258,7 +262,7 @@ export function ItemDetails({ itemId, onNavigate }: ItemDetailsProps) {
         size="sm"
       >
         <div className="p-6">
-          <p className="text-gray-700 mb-4">Share this link with anyone:</p>
+          <p className="text-text-muted mb-4">Share this link with anyone:</p>
           <Input value={shareUrl} readOnly className="mb-4" />
           <div className="flex gap-3 justify-end">
             <Button variant="secondary" onClick={() => setShareModalOpen(false)}>

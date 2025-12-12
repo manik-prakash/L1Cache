@@ -51,9 +51,9 @@ function ToastItem({ toast, onRemove }: { toast: Toast; onRemove: (id: string) =
   };
 
   const colors = {
-    success: 'bg-green-50 border-green-200',
-    error: 'bg-red-50 border-red-200',
-    info: 'bg-blue-50 border-blue-200',
+    success: 'bg-[#1a232c] border-green-500/30',
+    error: 'bg-[#1a232c] border-red-500/30',
+    info: 'bg-[#1a232c] border-[#0acffe]/30',
   };
 
   return (
@@ -62,10 +62,10 @@ function ToastItem({ toast, onRemove }: { toast: Toast; onRemove: (id: string) =
       role="alert"
     >
       {icons[toast.type]}
-      <p className="flex-1 text-sm text-gray-900">{toast.message}</p>
+      <p className="flex-1 text-sm text-[#e6edf3]">{toast.message}</p>
       <button
         onClick={() => onRemove(toast.id)}
-        className="p-1 text-gray-400 hover:text-gray-600 rounded transition-colors"
+        className="p-1 text-[#8b9ba7] hover:text-[#e6edf3] rounded transition-colors"
         aria-label="Close notification"
       >
         <X size={16} />

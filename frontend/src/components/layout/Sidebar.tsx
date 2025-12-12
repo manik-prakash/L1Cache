@@ -32,7 +32,7 @@ export function Sidebar({ currentView, onLogout, userDisplayName, userAvatar }: 
     <>
       <button
         onClick={toggleSidebar}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-lg shadow-lg border border-gray-200 hover:bg-gray-50"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-[#11181f] rounded-lg shadow-lg border border-[#1a232c] hover:bg-[#1a232c] text-[#e6edf3]"
         aria-label="Toggle menu"
       >
         {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -46,18 +46,18 @@ export function Sidebar({ currentView, onLogout, userDisplayName, userAvatar }: 
       )}
 
       <aside
-        className="hidden lg:flex lg:flex-col lg:fixed lg:inset-y-0 lg:w-64 lg:bg-white lg:border-r lg:border-gray-200 lg:overflow-y-auto"
+        className="hidden lg:flex lg:flex-col lg:fixed lg:inset-y-0 lg:w-64 lg:bg-[#11181f] lg:border-r lg:border-[#1a232c] lg:overflow-y-auto"
       >
-        <div className="p-6 border-b border-gray-200">
+        <div className="p-6 border-b border-[#1a232c]">
           <div className="flex items-center gap-2 mb-6">
-            <Brain className="text-blue-600" size={32} />
-            <span className="text-xl font-bold text-gray-900">Second Brain</span>
+            <Brain className="text-[#0acffe]" size={32} />
+            <span className="text-xl font-bold text-[#e6edf3]">Second Brain</span>
           </div>
 
           <div className="flex items-center gap-3">
             <Avatar src={userAvatar} alt={userDisplayName || 'User'} size="md" />
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">
+              <p className="text-sm font-medium text-[#e6edf3] truncate">
                 {userDisplayName || 'User'}
               </p>
             </div>
@@ -76,8 +76,8 @@ export function Sidebar({ currentView, onLogout, userDisplayName, userAvatar }: 
                 w-full flex items-center gap-3 px-6 py-3 text-left
                 transition-colors
                 ${currentView === item.id
-                  ? 'bg-blue-50 text-blue-600 border-r-2 border-blue-600'
-                  : 'text-gray-700 hover:bg-gray-50'
+                  ? 'bg-[#0acffe]/10 text-[#0acffe] border-r-2 border-[#0acffe]'
+                  : 'text-[#8b9ba7] hover:bg-[#1a232c]'
                 }
               `}
             >
@@ -87,7 +87,7 @@ export function Sidebar({ currentView, onLogout, userDisplayName, userAvatar }: 
           ))}
         </nav>
 
-        <div className="border-t border-gray-200">
+        <div className="border-t border-[#1a232c]">
           {bottomItems.map((item) => (
             <button
               key={item.id}
@@ -99,8 +99,8 @@ export function Sidebar({ currentView, onLogout, userDisplayName, userAvatar }: 
                 w-full flex items-center gap-3 px-6 py-3 text-left
                 transition-colors
                 ${currentView === item.id
-                  ? 'bg-blue-50 text-blue-600 border-r-2 border-blue-600'
-                  : 'text-gray-700 hover:bg-gray-50'
+                  ? 'bg-[#0acffe]/10 text-[#0acffe] border-r-2 border-[#0acffe]'
+                  : 'text-[#8b9ba7] hover:bg-[#1a232c]'
                 }
               `}
             >
@@ -111,7 +111,7 @@ export function Sidebar({ currentView, onLogout, userDisplayName, userAvatar }: 
 
           <button
             onClick={onLogout}
-            className="w-full flex items-center gap-3 px-6 py-3 text-left text-red-600 hover:bg-red-50 transition-colors"
+            className="w-full flex items-center gap-3 px-6 py-3 text-left text-red-500 hover:bg-[#1a232c] transition-colors"
           >
             <LogOut size={20} />
             <span className="font-medium">Logout</span>

@@ -51,23 +51,23 @@ export function Modal({ isOpen, onClose, title, children, size = 'md' }: ModalPr
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md bg-white/10"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md bg-[#0a0f14]/80"
       role="dialog"
       aria-modal="true"
       aria-labelledby={title ? 'modal-title' : undefined}
     >
       <div
         ref={modalRef}
-        className={`bg-white rounded-lg shadow-xl w-full ${sizes[size]} max-h-[90vh] overflow-hidden flex flex-col`}
+        className={`bg-[#11181f] rounded-lg shadow-xl w-full ${sizes[size]} max-h-[90vh] overflow-hidden flex flex-col border border-[#1a232c]`}
       >
         {title && (
-          <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
-            <h2 id="modal-title" className="text-xl font-semibold text-gray-900">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-[#1a232c]">
+            <h2 id="modal-title" className="text-xl font-semibold text-[#e6edf3]">
               {title}
             </h2>
             <button
               onClick={onClose}
-              className="p-1 text-gray-400 hover:text-gray-600 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="p-1 text-[#8b9ba7] hover:text-[#e6edf3] rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#0acffe]"
               aria-label="Close modal"
             >
               <X size={20} />

@@ -70,14 +70,14 @@ export function Signup({ onSwitchToLogin }: SignupProps) {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 to-gray-100 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8">
+    <div className="min-h-screen bg-[#0a0f14] flex items-center justify-center p-4">
+      <div className="w-full max-w-md bg-[#11181f] rounded-lg shadow-xl p-8 border border-[#1a232c]">
         <div className="flex items-center justify-center gap-2 mb-8">
-          <Brain className="text-blue-600" size={40} />
-          <span className="text-2xl font-bold text-gray-900">Second Brain</span>
+          <Brain className="text-[#0acffe]" size={32} />
+          <span className="text-2xl font-bold text-text-primary">Second Brain</span>
         </div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-2 text-center">Create Account</h1>
-        <p className="text-gray-600 mb-8 text-center">Start building your knowledge base today</p>
+        <h1 className="text-3xl font-bold text-text-primary mb-2 text-center">Create Account</h1>
+        <p className="text-text-muted mb-8 text-center">Start building your knowledge base today</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input
@@ -126,11 +126,11 @@ export function Signup({ onSwitchToLogin }: SignupProps) {
         </form>
 
         <div className="mt-6 text-center">
-          <p className="text-gray-600">
+          <p className="text-text-muted">
             Already have an account?{' '}
             <button
               onClick={onSwitchToLogin}
-              className="text-blue-600 hover:text-blue-700 font-medium focus:outline-none focus:underline"
+              className="text-[#0acffe] hover:text-[#28ffd3] font-medium focus:outline-none focus:underline"
             >
               Sign in
             </button>

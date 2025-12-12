@@ -269,7 +269,7 @@ export function ItemForm({ itemId, onNavigate }: ItemFormProps) {
           <ArrowLeft size={20} />
           Back to Dashboard
         </Button>
-        <h1 className="text-3xl font-bold text-gray-900">
+        <h1 className="text-3xl font-bold text-text-primary">
           {itemId ? 'Edit Item' : 'New Item'}
         </h1>
       </div>
@@ -285,7 +285,7 @@ export function ItemForm({ itemId, onNavigate }: ItemFormProps) {
         />
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-text-muted mb-1">
             Type
           </label>
           <div className="flex gap-2">
@@ -296,7 +296,7 @@ export function ItemForm({ itemId, onNavigate }: ItemFormProps) {
                 onClick={() => setType(t)}
                 className={`px-4 py-2 rounded-lg font-medium capitalize transition-colors ${type === t
                   ? 'bg-blue-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-[#1a232c] text-text-muted hover:bg-[#11181f]'
                   }`}
               >
                 {t}
@@ -329,15 +329,15 @@ export function ItemForm({ itemId, onNavigate }: ItemFormProps) {
           onCreateTag={handleCreateTag}
         />
 
-        <div className="border-t border-gray-200 pt-6">
+        <div className="border-t border-[#1a232c] pt-6">
           <label className="flex items-center gap-3 cursor-pointer">
             <input
               type="checkbox"
               checked={isPublic}
               onChange={(e) => setIsPublic(e.target.checked)}
-              className="w-4 h-4 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
+              className="w-4 h-4 text-[#0acffe] rounded focus:ring-2 focus:ring-[#0acffe]"
             />
-            <span className="text-sm font-medium text-gray-700">
+            <span className="text-sm font-medium text-text-muted">
               Make this item public
             </span>
           </label>

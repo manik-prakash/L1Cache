@@ -23,7 +23,8 @@ export function PublicShared({ slug }: PublicSharedProps) {
     try {
       const itemData = await api.get<Item>(`/public/shared/${slug}`);
       setItem(itemData);
-    } catch (error: unknown) {
+    } catch (error) {
+      console.log(error);
       setNotFound(true);
     } finally {
       setLoading(false);
@@ -40,7 +41,7 @@ export function PublicShared({ slug }: PublicSharedProps) {
     html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
 
-    html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">$1</a>');
+    html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="text-[#0acffe] hover:underline" target="_blank" rel="noopener noreferrer">$1</a>');
 
     html = html.replace(/^- (.*$)/gim, '<li class="ml-4">$1</li>');
     html = html.replace(/(<li.*<\/li>)/s, '<ul class="list-disc mb-2">$1</ul>');
@@ -60,7 +61,7 @@ export function PublicShared({ slug }: PublicSharedProps) {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex justify-center items-center">
+      <div className="min-h-screen bg-[#0a0f14] flex justify-center items-center">
         <Spinner size="lg" />
       </div>
     );
@@ -68,34 +69,34 @@ export function PublicShared({ slug }: PublicSharedProps) {
 
   if (notFound || !item) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <nav className="bg-white border-b border-gray-200">
+      <div className="min-h-screen bg-[#0a0f14]">
+        <nav className="bg-[#11181f] border-b border-[#1a232c]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center gap-2">
-            <Brain className="text-blue-600" size={32} />
-            <span className="text-xl font-bold text-gray-900">Second Brain</span>
+            <Brain className="text-[#0acffe]" size={32} />
+            <span className="text-xl font-bold text-text-primary">Second Brain</span>
           </div>
         </nav>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Item Not Found</h1>
-          <p className="text-gray-600 mb-8">This shared item doesn't exist or is no longer public.</p>
+          <h1 className="text-3xl font-bold text-text-primary mb-4">Item Not Found</h1>
+          <p className="text-text-muted mb-8">This shared item doesn't exist or is no longer public.</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white border-b border-gray-200">
+    <div className="min-h-screen bg-[#0a0f14]">
+      <nav className="bg-[#11181f] border-b border-[#1a232c]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center gap-2">
-          <Brain className="text-blue-600" size={32} />
-          <span className="text-xl font-bold text-gray-900">Second Brain</span>
+          <Brain className="text-[#0acffe]" size={32} />
+          <span className="text-xl font-bold text-text-primary">Second Brain</span>
         </div>
       </nav>
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-white rounded-lg border border-gray-200 shadow-sm">
+        <div className="bg-[#11181f] rounded-lg border border-[#1a232c] shadow-sm">
           <div className="p-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">{item.title}</h1>
+            <h1 className="text-3xl font-bold text-text-primary mb-2">{item.title}</h1>
             <div className="flex items-center gap-4 text-sm text-gray-500 mb-6">
               <span className="capitalize">{item.type}</span>
               <span>•</span>
@@ -107,7 +108,7 @@ export function PublicShared({ slug }: PublicSharedProps) {
                 href={item.source_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-blue-600 hover:text-blue-700 mb-6"
+                className="flex items-center gap-2 text-[#0acffe] hover:text-[#28ffd3] mb-6"
               >
                 <ExternalLink size={16} />
                 <span className="break-all">{item.source_url}</span>
@@ -116,24 +117,24 @@ export function PublicShared({ slug }: PublicSharedProps) {
 
             {item.tags && item.tags.length > 0 && (
               <div className="flex flex-wrap gap-2 mb-6">
-                {item.tags.map((tag: any) => (
+                {item.tags.map((tag) => (
                   <Tag key={tag.id} label={tag.name} color={tag.color || undefined} />
                 ))}
               </div>
             )}
 
             <div
-              className="prose prose-sm max-w-none text-gray-700"
+              className="prose prose-sm max-w-none text-text-primary"
               dangerouslySetInnerHTML={{ __html: renderMarkdown(item.content) }}
             />
           </div>
         </div>
 
         <div className="mt-8 text-center">
-          <p className="text-gray-600 mb-4">Want to build your own knowledge base?</p>
+          <p className="text-text-muted mb-4">Want to build your own knowledge base?</p>
           <a
             href="/"
-            className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
+            className="inline-block px-6 py-3 gradient-aqua text-[#0a0f14] rounded-lg font-medium hover:opacity-90 transition-opacity"
           >
             Get Started with Second Brain
           </a>

@@ -1,2 +1,52 @@
 @import "tailwindcss";
-@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-background: #0a0f14;
+  --color-surface: #11181f;
+  --color-elevated: #1a232c;
+  --color-primary: #0acffe;
+  --color-accent: #28ffd3;
+  --color-text-primary: #e6edf3;
+  --color-text-muted: #8b9ba7;
+  
+  /* Define custom colors for Tailwind */
+  --color-dark-bg: #0a0f14;
+  --color-dark-surface: #11181f;
+  --color-dark-elevated: #1a232c;
+  --color-primary-cyan: #0acffe;
+  --color-accent-green: #28ffd3;
+}
+
+/* Global base styles */
+* {
+  border-color: var(--color-elevated);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-elevated);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* Gradient utility */
+.gradient-aqua {
+  background: linear-gradient(135deg, #0acffe 0%, #28ffd3 100%);
+}

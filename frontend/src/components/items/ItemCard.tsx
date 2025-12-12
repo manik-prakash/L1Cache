@@ -49,12 +49,12 @@ export function ItemCard({
   };
 
   return (
-    <Card className="hover:shadow-md transition-shadow cursor-pointer">
-      <CardBody onClick={() => onClick(id)}>
+    <Card className="hover:shadow-md transition-shadow cursor-pointer flex flex-col h-full">
+      <CardBody onClick={() => onClick(id)} className="flex-1 flex flex-col">
         <div className="flex items-start justify-between gap-2 mb-3">
           <div className="flex items-center gap-2 flex-1">
             {typeIcons[type]}
-            <h3 className="text-lg font-semibold text-gray-900 truncate">{title}</h3>
+            <h3 className="text-lg font-semibold text-[#e6edf3] truncate">{title}</h3>
             {isStarred && <Star size={16} className="text-yellow-500 fill-yellow-500 shrink-0" />}
             {isPublic && <Share2 size={16} className="text-blue-500 shrink-0" />}
           </div>
@@ -62,10 +62,10 @@ export function ItemCard({
             <Dropdown
               trigger={
                 <button
-                  className="p-1 hover:bg-gray-100 rounded transition-colors"
+                  className="p-1 hover:bg-[#1a232c] rounded transition-colors"
                   aria-label="Item options"
                 >
-                  <MoreVertical size={20} className="text-gray-600" />
+                  <MoreVertical size={20} className="text-[#8b9ba7]" />
                 </button>
               }
             >
@@ -79,14 +79,14 @@ export function ItemCard({
                 Share
               </DropdownItem>
               <DropdownDivider />
-              <DropdownItem onClick={() => onDelete(id)} icon={<Trash2 size={16} />} className="text-red-600 hover:bg-red-50">
+              <DropdownItem onClick={() => onDelete(id)} icon={<Trash2 size={16} />} className="text-red-500 hover:bg-[#1a232c]">
                 Delete
               </DropdownItem>
             </Dropdown>
           </div>
         </div>
 
-        <p className="text-gray-600 text-sm mb-3 line-clamp-3">{content || 'No content'}</p>
+        <p className="text-[#8b9ba7] text-sm mb-3 line-clamp-3">{content || 'No content'}</p>
 
         {sourceUrl && (
           <a
@@ -94,15 +94,17 @@ export function ItemCard({
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-700 mb-3"
+            className="flex items-center gap-1 text-sm text-[#0acffe] hover:text-[#28ffd3] mb-3"
           >
             <ExternalLink size={14} />
             <span className="truncate">{sourceUrl}</span>
           </a>
         )}
 
+        <div className="flex-1" />
+
         {tags.length > 0 && (
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 mt-auto">
             {tags.map((tag) => (
               <Tag key={tag.id} label={tag.name} color={tag.color || undefined} />
             ))}

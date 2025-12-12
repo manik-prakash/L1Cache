@@ -21,7 +21,7 @@ export function Avatar({ src, alt, size = 'md', className = '' }: AvatarProps) {
 
   return (
     <div
-      className={`${sizes[size]} rounded-full overflow-hidden bg-blue-500 text-white flex items-center justify-center font-medium ${className}`}
+      className={`${sizes[size]} rounded-full inline-flex items-center justify-center font-semibold gradient-aqua text-[#0a0f14] ${className}`}
     >
       {src ? (
         <img src={src} alt={alt} className="w-full h-full object-cover" />
