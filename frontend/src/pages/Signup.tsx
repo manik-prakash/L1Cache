@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Brain } from 'lucide-react';
+import { BrainCircuit } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
 import { useAuth } from '../contexts/AuthContext';
@@ -73,7 +73,7 @@ export function Signup({ onSwitchToLogin }: SignupProps) {
     <div className="min-h-screen bg-[#0a0f14] flex items-center justify-center p-4">
       <div className="w-full max-w-md bg-[#11181f] rounded-lg shadow-xl p-8 border border-[#1a232c]">
         <div className="flex items-center justify-center gap-2 mb-8">
-          <Brain className="text-[#0acffe]" size={32} />
+          <BrainCircuit className="text-[#0acffe]" size={32} />
           <span className="text-2xl font-bold text-text-primary">ThoughtCache</span>
         </div>
         <h1 className="text-3xl font-bold text-text-primary mb-2 text-center">Create Account</h1>

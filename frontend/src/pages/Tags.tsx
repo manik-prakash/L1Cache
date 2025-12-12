@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Tag as TagIcon, Plus, ArrowLeft } from 'lucide-react';
+import { Tag as TagIcon, Plus} from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
 import { Card } from '../components/ui/Card';
@@ -10,7 +10,6 @@ import { useToast } from '../components/ui/Toast';
 import { api } from '../lib/httpClient';
 import { getErrorMessage } from '../lib/utils';
 import type { Tag } from '../lib/types';
-import { useNavigate } from 'react-router-dom';
 
 export function Tags() {
     const [tags, setTags] = useState<Tag[]>([]);
@@ -19,7 +18,6 @@ export function Tags() {
     const [newTagName, setNewTagName] = useState('');
     const { user } = useAuth();
     const { showToast } = useToast();
-    const navigate = useNavigate();
 
     useEffect(() => {
         fetchTags();
@@ -75,14 +73,7 @@ export function Tags() {
         <div className="p-6 max-w-6xl mx-auto">
             {/* Header */}
             <div className="mb-8">
-                <Button
-                    variant="ghost"
-                    onClick={() => navigate('/dashboard')}
-                    className="mb-4"
-                >
-                    <ArrowLeft size={20} className="mr-2" />
-                    Back to Dashboard
-                </Button>
+
 
                 <div className="flex items-center justify-between">
                     <div>

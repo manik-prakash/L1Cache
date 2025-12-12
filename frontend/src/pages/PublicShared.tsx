@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Brain, ExternalLink } from 'lucide-react';
+import { BrainCircuit, ExternalLink } from 'lucide-react';
 import { Tag } from '../components/ui/Tag';
 import { Spinner } from '../components/ui/Spinner';
 import { api } from '../lib/httpClient';
@@ -72,7 +72,7 @@ export function PublicShared({ slug }: PublicSharedProps) {
       <div className="min-h-screen bg-[#0a0f14]">
         <nav className="bg-[#11181f] border-b border-[#1a232c]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center gap-2">
-            <Brain className="text-[#0acffe]" size={32} />
+            <BrainCircuit className="text-[#0acffe]" size={32} />
             <span className="text-xl font-bold text-text-primary">ThoughtCache</span>
           </div>
         </nav>
@@ -88,8 +88,8 @@ export function PublicShared({ slug }: PublicSharedProps) {
     <div className="min-h-screen bg-[#0a0f14]">
       <nav className="bg-[#11181f] border-b border-[#1a232c]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center gap-2">
-          <Brain className="text-[#0acffe]" size={32} />
-          <span className="text-xl font-bold text-text-primary">Second Brain</span>
+          <BrainCircuit className="text-[#0acffe]" size={32} />
+          <span className="text-xl font-bold text-text-primary">ThoughtCache</span>
         </div>
       </nav>
 

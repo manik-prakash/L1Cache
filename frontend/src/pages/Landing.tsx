@@ -1,4 +1,4 @@
-import { Brain, BookMarked, Share2, Search } from 'lucide-react';
+import { BrainCircuit, BookMarked, Share2, Search } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 
 interface LandingProps {
@@ -11,7 +11,7 @@ export function Landing({ onGetStarted }: LandingProps) {
       <nav className="bg-[#11181f] border-b border-[#1a232c]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex justify-between items-center border-b border-[#1a232c]">
           <div className="flex items-center gap-2">
-            <Brain className="text-[#0acffe]" size={32} />
+            <BrainCircuit className="text-[#0acffe]" size={32} />
             <span className="text-xl font-bold text-text-primary">ThoughtCache</span>
           </div>
           <Button onClick={onGetStarted} size="sm">
@@ -36,7 +36,7 @@ export function Landing({ onGetStarted }: LandingProps) {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           <FeatureCard
-            icon={<Brain className="text-[#0acffe]" size={32} />}
+            icon={<BrainCircuit className="text-[#0acffe]" size={32} />}
             title="Capture Anything"
             description="Save thoughts, links, tweets, articles, and media in one place"
           />
@@ -72,7 +72,7 @@ export function Landing({ onGetStarted }: LandingProps) {
 
       <footer className="border-t border-[#1a232c] mt-16 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-text-muted">
-          <p>ThoughtCache &copy; 2025. Built by Manik.</p>
+          <p>ThoughtCache &copy; 2025. Built by Manik</p>
         </div>
       </footer>
     </div>

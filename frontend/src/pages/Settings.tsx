@@ -64,7 +64,7 @@ export function Settings() {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `second-brain-export-${Date.now()}.json`;
+      a.download = `ThoughtCache-export-${Date.now()}.json`;
       a.click();
       URL.revokeObjectURL(url);
 

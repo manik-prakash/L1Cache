@@ -24,18 +24,17 @@ function ProtectedRoute({ children }: { children: React.ReactElement }) {
   if (!user) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
-
   return children;
 }
 
-function ComingSoon({ title }: { title: string }) {
-  return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold text-gray-900 mb-4 capitalize">{title}</h1>
-      <p className="text-gray-600">This feature is coming soon!</p>
-    </div>
-  );
-}
+// function ComingSoon({ title }: { title: string }) {
+//   return (
+//     <div className="p-6 max-w-4xl mx-auto">
+//       <h1 className="text-3xl font-bold text-gray-900 mb-4 capitalize">{title}</h1>
+//       <p className="text-gray-600">This feature is coming soon!</p>
+//     </div>
+//   );
+// }
 
 function DashboardWrapper() {
   const navigate = useNavigate();
@@ -44,6 +43,21 @@ function DashboardWrapper() {
     <Dashboard
       onNavigate={(view, id) => {
         if (view === 'new') navigate('/new');
+        else if (view === 'edit' && id) navigate(`/edit/${id}`);
+        else if (view === 'item' && id) navigate(`/item/${id}`);
+      }}
+    />
+  );
+}
+
+function SharedWrapper() {
+  const navigate = useNavigate();
+
+  return (
+    <Shared
+      onNavigate={(view, id) => {
+        if (view === 'dashboard') navigate('/dashboard');
+        else if (view === 'new') navigate('/new');
         else if (view === 'edit' && id) navigate(`/edit/${id}`);
         else if (view === 'item' && id) navigate(`/item/${id}`);
       }}
@@ -177,7 +191,7 @@ function AppRouter() {
           path="/shared"
           element={
             <ProtectedRoute>
-              <Shared onNavigate={handleNavigate} />
+              <SharedWrapper />
             </ProtectedRoute>
           }
         />

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FolderOpen, ArrowLeft } from 'lucide-react';
+import { FolderOpen} from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { ItemCard } from '../components/items/ItemCard';
 import { Tag as TagBadge } from '../components/ui/Tag';
@@ -114,14 +114,6 @@ export function Collections() {
         <div className="p-6 max-w-7xl mx-auto">
             {/* Header */}
             <div className="mb-8">
-                <Button
-                    variant="ghost"
-                    onClick={() => navigate('/dashboard')}
-                    className="mb-4"
-                >
-                    <ArrowLeft size={20} className="mr-2" />
-                    Back to Dashboard
-                </Button>
 
                 <div className="flex items-center justify-between">
                     <div>

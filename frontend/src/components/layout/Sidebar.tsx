@@ -1,4 +1,4 @@
-import { Brain, LayoutDashboard, Plus, FolderOpen, Tag, Share2, Settings, LogOut, Menu, X } from 'lucide-react';
+import { BrainCircuit, LayoutDashboard, Plus, FolderOpen, Tag, Share2, Settings, LogOut, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { Avatar } from '../ui/Avatar';
 import { useNavigate } from 'react-router-dom';
@@ -50,7 +50,7 @@ export function Sidebar({ currentView, onLogout, userDisplayName, userAvatar }: 
       >
         <div className="p-6 border-b border-[#1a232c]">
           <div className="flex items-center gap-2 mb-6">
-            <Brain className="text-[#0acffe]" size={32} />
+            <BrainCircuit className="text-[#0acffe]" size={32} />
             <span className="text-xl font-bold text-text-primary">ThoughtCache</span>
           </div>
 

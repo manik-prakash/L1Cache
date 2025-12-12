@@ -141,9 +141,6 @@ export function Shared({ onNavigate }: SharedProps) {
                             {filteredItems.length} {filteredItems.length === 1 ? 'item' : 'items'} shared publicly
                         </p>
                     </div>
-                    <Button onClick={() => onNavigate('dashboard')} variant="secondary">
-                        Go to Dashboard
-                    </Button>
                 </div>
 
                 <div className="relative">
