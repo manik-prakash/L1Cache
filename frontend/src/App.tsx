@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
-import { ThemeProvider } from './contexts/ThemeContext';
 import { ToastProvider } from './components/ui/Toast';
 import { Landing } from './pages/Landing';
 import { Login } from './pages/Login';
@@ -16,16 +15,8 @@ import { Spinner } from './components/ui/Spinner';
 import './App.css';
 
 function ProtectedRoute({ children }: { children: React.ReactElement }) {
-  const { user, loading } = useAuth();
+  const { user } = useAuth();
   const location = useLocation();
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <Spinner size="lg" />
-      </div>
-    );
-  }
 
   if (!user) {
     return <Navigate to="/login" state={{ from: location }} replace />;
@@ -188,13 +179,11 @@ function AppRouter() {
 export default function App() {
   return (
     <AuthProvider>
-      <ThemeProvider>
-        <ToastProvider>
-          <BrowserRouter>
-            <AppRouter />
-          </BrowserRouter>
-        </ToastProvider>
-      </ThemeProvider>
+      <ToastProvider>
+        <BrowserRouter>
+          <AppRouter />
+        </BrowserRouter>
+      </ToastProvider>
     </AuthProvider>
   );
 }

@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Moon, Sun, Download } from 'lucide-react';
+import { Download } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
 import { Avatar } from '../components/ui/Avatar';
 import { useAuth } from '../contexts/AuthContext';
-import { useTheme } from '../contexts/ThemeContext';
 import { useToast } from '../components/ui/Toast';
 import { api } from '../lib/httpClient';
 import {getErrorMessage} from '../lib/utils';
@@ -15,7 +14,6 @@ export function Settings() {
   const [avatarUrl, setAvatarUrl] = useState('');
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
-  const { theme, toggleTheme } = useTheme();
   const { showToast } = useToast();
 
   useEffect(() => {
@@ -123,33 +121,6 @@ export function Settings() {
               {loading ? 'Saving...' : 'Save Changes'}
             </Button>
           </form>
-        </section>
-
-        <section className="bg-white rounded-lg border border-gray-200 shadow-sm p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Appearance</h2>
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="font-medium text-gray-900">Theme</p>
-              <p className="text-sm text-gray-500">Switch between light and dark mode</p>
-            </div>
-            <Button
-              variant="secondary"
-              onClick={toggleTheme}
-              className="flex items-center gap-2"
-            >
-              {theme === 'light' ? (
-                <>
-                  <Moon size={18} />
-                  Dark Mode
-                </>
-              ) : (
-                <>
-                  <Sun size={18} />
-                  Light Mode
-                </>
-              )}
-            </Button>
-          </div>
         </section>
 
         <section className="bg-white rounded-lg border border-gray-200 shadow-sm p-6">

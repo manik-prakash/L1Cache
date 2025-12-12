@@ -49,10 +49,6 @@ export interface ProfileResponse {
   avatar_url: string | null;
 }
 
-export interface ThemeResponse {
-  theme: 'light' | 'dark';
-}
-
 export interface ExportResponse {
   items: Item[];
   tags: Tag[];

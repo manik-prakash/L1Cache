@@ -45,41 +45,4 @@ export const updateProfile = async (req: AuthRequest, res: Response): Promise<vo
   }
 };
 
-export const getTheme = async (req: AuthRequest, res: Response): Promise<void> => {
-  try {
-    const userId = new mongoose.Types.ObjectId(req.user!.id);
-    const profile = await Profile.findOne({ user_id: userId });
-
-    if (!profile) {
-      res.json({ theme: 'light' });
-      return;
-    }
-
-    res.json({ theme: profile.theme });
-  } catch (error: any) {
-    res.status(500).json({ error: 'Failed to get theme', message: error.message });
-  }
-};
-
-export const updateTheme = async (req: AuthRequest, res: Response): Promise<void> => {
-  try {
-    const { theme } = req.body;
-    const userId = new mongoose.Types.ObjectId(req.user!.id);
-
-    if (!['light', 'dark'].includes(theme)) {
-      res.status(400).json({ error: 'Theme must be light or dark' });
-      return;
-    }
-
-    const profile = await Profile.findOneAndUpdate(
-      { user_id: userId },
-      { theme },
-      { new: true, upsert: true }
-    );
-
-    res.json({ theme: profile.theme });
-  } catch (error: any) {
-    res.status(500).json({ error: 'Failed to update theme', message: error.message });
-  }
-};
 

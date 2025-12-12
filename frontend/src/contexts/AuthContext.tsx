@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import { api, tokenManager } from '../lib/httpClient';
-import {getErrorMessage} from '../lib/utils';
+import { getErrorMessage } from '../lib/utils';
 import type { ApiUser, LoginCredentials, SignupData, AuthResponse } from '../lib/types';
 
 export interface AuthError {
@@ -76,7 +76,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       await api.post('/auth/logout');
     } catch (error) {
-      // Even if logout fails, clear local state
       console.error('Logout error:', error);
     } finally {
       tokenManager.remove();
@@ -91,6 +90,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined) {

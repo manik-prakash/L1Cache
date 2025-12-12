@@ -4,7 +4,6 @@ export interface IProfile extends Document {
   user_id: Types.ObjectId;
   display_name: string | null;
   avatar_url: string | null;
-  theme: 'light' | 'dark';
   created_at: Date;
   updated_at: Date;
 }
@@ -24,11 +23,6 @@ const profileSchema = new Schema<IProfile>(
     avatar_url: {
       type: String,
       default: null,
-    },
-    theme: {
-      type: String,
-      enum: ['light', 'dark'],
-      default: 'light',
     },
   },
   {
