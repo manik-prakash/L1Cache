@@ -23,7 +23,7 @@ export const StepCard = memo(({ step, icon, title, description, delay }: StepCar
             transition={{ duration: 0.3 }}
         >
             <div className="flex items-center gap-4 mb-6">
-                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#0acffe]/10 border border-[#0acffe]/30 flex items-center justify-center">
+                <div className="shrink-0 w-12 h-12 rounded-full bg-[#0acffe]/10 border border-[#0acffe]/30 flex items-center justify-center">
                     <span className="text-[#0acffe] font-bold text-lg">{step}</span>
                 </div>
                 <motion.div
@@ -39,7 +39,7 @@ export const StepCard = memo(({ step, icon, title, description, delay }: StepCar
 
         {/* Connector line (hidden on last item) */}
         {step < 3 && (
-            <div className="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-[#0acffe]/30 to-transparent" />
+            <div className="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-linear-to-r from-[#0acffe]/30 to-transparent" />
         )}
     </motion.div>
 ));

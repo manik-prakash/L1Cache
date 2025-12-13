@@ -26,7 +26,7 @@ export function HeroSection({ onGetStarted }: HeroSectionProps) {
                 >
                     Your Digital<br />
                     <motion.span
-                        className="bg-gradient-to-r from-[#0acffe] via-pink-500 to-green-500 text-transparent bg-clip-text"
+                        className="bg-linear-to-r from-[#0acffe] via-pink-500 to-green-500 text-transparent bg-clip-text"
                         animate={{
                             backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
                         }}

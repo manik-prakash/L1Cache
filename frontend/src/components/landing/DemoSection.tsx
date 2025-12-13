@@ -24,7 +24,7 @@ export function DemoSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.8 }}
-                className="relative rounded-3xl overflow-hidden border border-[#1a232c] bg-gradient-to-br from-[#11181f] to-[#0a0f14] p-8 md:p-12"
+                className="relative rounded-3xl overflow-hidden border border-[#1a232c] bg-linear-to-br from-[#11181f] to-[#0a0f14] p-8 md:p-12"
             >
                 <div className="aspect-video bg-[#0a0f14] rounded-2xl border border-[#0acffe]/30 flex items-center justify-center backdrop-blur-sm">
                     <div className="text-center">

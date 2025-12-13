@@ -9,7 +9,7 @@ export function CTASection({ onGetStarted }: CTASectionProps) {
     return (
         <section className="py-20">
             <motion.div
-                className="bg-gradient-to-br from-[#11181f] to-[#0a0f14] rounded-3xl shadow-2xl p-12 text-center border border-[#1a232c] relative overflow-hidden"
+                className="bg-linear-to-br from-[#11181f] to-[#0a0f14] rounded-3xl shadow-2xl p-12 text-center border border-[#1a232c] relative overflow-hidden"
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
@@ -17,7 +17,7 @@ export function CTASection({ onGetStarted }: CTASectionProps) {
                 whileHover={{ scale: 1.02 }}
             >
                 <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-[#0acffe]/5 via-transparent to-pink-600/5"
+                    className="absolute inset-0 bg-linear-to-r from-[#0acffe]/5 via-transparent to-pink-600/5"
                     initial={{ opacity: 0 }}
                     whileHover={{ opacity: 1 }}
                     transition={{ duration: 0.5 }}
